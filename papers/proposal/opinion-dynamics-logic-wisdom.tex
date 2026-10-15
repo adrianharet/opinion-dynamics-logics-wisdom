@@ -1,0 +1,278 @@
+\documentclass{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{hyphenat}
+\usepackage{graphicx}
+\usepackage{nicefrac}
+\usepackage{booktabs}
+\usepackage{todonotes}
+\usepackage{bm}
+\usepackage{BOONDOX-calo} % for nicer calligraphic symbols
+\usepackage{authblk}
+\usepackage{subcaption}
+
+\usepackage[square]{natbib}
+\bibliographystyle{chicago}
+
+\usepackage{geometry}
+\usepackage[
+    unicode = true, 
+    bookmarks = false, 
+    breaklinks = true, 
+    pdfborder = {0 0 1},
+    colorlinks = true
+    ]{hyperref}
+
+\geometry{vmargin = 3cm, hmargin = 3cm}
+
+\usetikzlibrary{
+    automata, 
+    positioning, 
+    calc, 
+    shapes, 
+    arrows, 
+    fit
+    }
+
+% \tikzset{
+%     every loop/.style = {
+%         min distance = 1mm, 
+%         out = 25, 
+%         in = -25, 
+%         looseness = 5
+%         }
+%     }
+
+\definecolor{PastelGreen}{HTML}{6ECB63}
+\definecolor{EarthyGreen}{HTML}{588157}
+\definecolor{Azure}{RGB}{0, 128, 255}
+\definecolor{Fiery}{HTML}{c1121f}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{example}{Example}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{claim}{Claim}
+\newtheorem{observation}{Observation}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\renewcommand{\descriptionlabel}[1]{$\triangleright$ \textit{#1}}
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\theta}{\vartheta}
+\newcommand{\len}{\mathsf{len}}
+\newcommand{\net}{\mathsf{net}}
+\renewcommand{\min}{\mathit{min}}
+\renewcommand{\max}{\mathit{max}}
+\newcommand{\avg}{\mathit{avg}}
+\newcommand{\ev}{\mathbb{E}}
+\newcommand{\merge}{M}
+
+\hypersetup{
+    linkcolor = blue,
+    citecolor = Azure,
+    filecolor = blue,
+    urlcolor = blue
+    }
+
+\tikzset{
+	a/.style={
+        draw,
+        rounded corners=2pt, 
+        minimum width=1cm, 
+        minimum height=1cm, 
+        thick,
+        color=black,
+        fill=EarthyGreen, 
+        text=white,
+        font=\Large
+        },
+    b/.style={
+        draw,
+        rounded corners=2pt, 
+        minimum width=1cm, 
+        minimum height=1cm, 
+        thick,
+        color=black,
+        fill=Fiery, 
+        text=white,
+        font=\Large
+        },
+    a-agent/.style={
+        draw,
+        circle, 
+        minimum width=2.5em, 
+        thick,
+        color=black,
+        fill=EarthyGreen, 
+        text=white,
+        font=\Large
+        },
+    b-agent/.style={
+        draw,
+        circle, 
+        minimum width=2.5em, 
+        thick,
+        color=black,
+        fill=Fiery, 
+        text=white,
+        font=\Large
+        },
+    neutral-agent/.style={
+        draw,
+        circle, 
+        minimum width=2.5em, 
+        thick,
+        color=black,
+        fill=gray, 
+        text=white,
+        font=\Large
+        }
+    }
+
+
+\newcommand{\adrian}[1]{
+    {
+        \hfill
+        \begin{minipage}{0.9\textwidth}
+            \begin{flushright}
+                \color{PastelGreen}
+                \footnotesize
+                \small 
+                {\footnotesize\textsf{\textbf{Adrian}}}\\ 
+                \textsf{#1}
+            \end{flushright}
+        \end{minipage}
+    }
+    }
+
+
+\title{
+    Social Learning with Logical Formulas
+    }
+\author{Edoardo, Adrian \dots}
+\date{}
+
+
+
+
+\begin{document}
+\maketitle
+% \setcounter{tocdepth}{1}
+% \tableofcontents
+
+\begin{abstract}
+    \noindent
+    We study social learning with logical formulas.
+\end{abstract}
+
+\section{Introduction}\label{sec:introduction}
+Does social learning work when opinions are more sophisticated representations of the world,
+like logical formulas? We find out.
+
+There is work that look at opinion dynamics with logical formulas
+\citep{Schwind2015BeliefRevisiona,Schwind2016PromotingBeliefs,Christoff2017StabilityBinary,Botan2019MultiIssueOpinion,Schwind2024BeliefFlowFramework,Schwind2026CharacterizingConsensuses},
+but usually with an eye towards consensus.
+It seems that the truth-tracking dimension on a network has not been tackled yet.
+
+
+
+\paragraph{Contributions.}
+We show interesting things.
+
+\paragraph{Related Literature.}
+Belief merging operators \citep{Konieczny2011LogicBased} and their truth-tracking properties \citep{Everaere2010EpistemicView,Everaere2020BeliefMerging}.
+
+Some precursors in the belief merging literature 
+\citep{Schwind2015BeliefRevisiona,Schwind2016PromotingBeliefs,Schwind2024BeliefFlowFramework,Schwind2026CharacterizingConsensuses},
+though these only look at convergence (no truth involved).
+
+The opinion diffusion literature \citep{Grandi2015PropositionalOpinion,Christoff2017StabilityBinary,Botan2019MultiIssueOpinion,Grandi2021GamesInfluence}.
+
+The computational literature \citep{Betz2013DebateDynamics}.
+
+The DeGroot dynamics \citep{DeGroot1974ReachingConsensus}, and the wisdom aspect, where we have a ground truth \citep{Golub2010NaiveLearning}.
+
+
+\section{Model}\label{sec:model}
+% For any $n \geq 1$, $[n] = \{1, \dots, n\}$ is the set of positive integers from $1$ to $n$.
+
+
+\paragraph{Agents.}
+\emph{Agents} are the nodes of a finite, directed graph $G = (N, E)$, 
+where $N = \{1, \dots, n\}$ is the set of agents, and $E$ is the set of edges.   
+We write $N(i)$ for $i$'s out-neighborhood in $G$, 
+i.e., $N(i) = \{j \mid (i, j) \in E\}$, the set of agents that $i$ has an edge to.
+Intuitively, $N(i)$ is the set of agents that $i$ pays attention to $G$.  
+
+\paragraph{Opinion Dynamics.}
+There is a set $A = \{a_1, \dots a_m\}$ of \emph{atoms},
+with $L$ being the set of \emph{logical formulas} constructed using these atoms
+using the usual connectives ($\lnot$, $\land$, $\lor$, $\rightarrow$, $\bot$ and $\top$).
+We call $2^A$ the set of \emph{possible worlds}, or \emph{truth-value assignments}.
+If $\phi \in L$ is a propositional formula, $[\phi] \subseteq 2^A$ is the set of models of $\phi$,
+i.e., the truth-value assignments that make $\phi$ true.
+
+The dynamics occurs in rounds $t \in \{0, 1, \dots\}$.
+For each agent $i$, $\phi_i^t \in L$ is agent $i$'s opinion at $t$.
+We assume opinions at $t=0$ are given by a noise model (see below). 
+After this, agents update their opinions using the opinions of their neighbors 
+and a merging operator $M$:
+$$
+    \phi_i^{t+1} = \merge {\left(\phi_j^t \mid j \in N(i)\right)},
+$$
+i.e., $i$'s opinion at $t+1$ is the result of merging 
+the opinions at $t$ of $i$'s neighbors in $G$.
+Note that $i$'s own opinion at $t$ enters here if we assume there is an edge from $i$ to itself $G$.     
+
+\paragraph{Merging Operators.}
+What merging operators shall we use?
+
+\paragraph{Noise Model.}
+Here we describe a noise model that generates initial opinions. 
+
+We assume, first of all, that there exists a ground truth state of the world 
+$w^\star \in 2^A$.
+
+[TBC]
+
+\paragraph{Questions.}
+Do we get that each agent's beliefs stabilize, i.e., is there some belief $\phi_i^*$ 
+such that:
+$$
+    \lim_{t \rightarrow \infty} \phi_i^t = \phi_i^*,
+$$
+for any agent $i$? Under what conditions does this happen?
+
+If agents' beliefs stabilize, do we see consensus? In other words, 
+is there some belief $\phi^*$ such that $\phi_i^* = \phi^*$,
+for any agent $i$? And under what conditions?
+
+If there is consensus, do we see consensus to the truth as $n$ grows? 
+Take a family of graphs $G_n$ in which the dynamics 
+reaches consensus $\phi^*(n)$ as $t \rightarrow \infty$.
+Call a family of graphs $G_n$ \emph{wise} if:
+$$
+    \lim_{n \rightarrow \infty} {\Pr}\Big[ \big[\phi^*(n)\big] = w^\star \Big] = 1,
+$$   
+i.e., if the consensus belief over the whole graph $G_n$ is exactly (a formula with the model) $w^\star$,
+the ground truth state, with high probability, as $n$ grows.    
+Our question, then, is what kind of networks are wise, and for which noise models?
+
+\bibliography{bibliography}
+% \bibliographystyle{plain}
+\end{document}
